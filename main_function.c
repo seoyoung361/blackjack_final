@@ -35,8 +35,6 @@ int gameEnd = 0; 							//game end flag
 
 int main(int argc, char *argv[]) {
 	
-	
-	int main(int argc, char *argv[]) {
 	int roundIndex = 0;
 	int max_user;
 	int i;
@@ -58,11 +56,16 @@ int main(int argc, char *argv[]) {
 
 	//Game start --------
 	do {
+		roundIndex++;
+		
+		printf("------ROUND:%d\n------", roundIndex);
 		
 		betDollar();
+		
 		offerCards(); //1. give cards to all the players
 		
 		printCardInitialStatus();
+		
 		printf("\n------------------ GAME start --------------------------\n");
 		
 		//each player's turn
