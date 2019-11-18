@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main_function.o playernumber.o
-LINKOBJ  = main_function.o playernumber.o
+OBJ      = card_processing_f().o
+LINKOBJ  = card_processing_f().o
 LIBS     = -L"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib" -L"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -24,8 +24,5 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-main_function.o: main_function.c
-	$(CC) -c main_function.c -o main_function.o $(CFLAGS)
-
-playernumber.o: playernumber.c
-	$(CC) -c playernumber.c -o playernumber.o $(CFLAGS)
+card_processing_f().o: card_processing_f().c
+	$(CC) -c card_processing_f().c -o card_processing_f().o $(CFLAGS)
