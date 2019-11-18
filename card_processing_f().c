@@ -85,7 +85,7 @@ void printCard(int cardnum) {
 	
 	switch(number_of_card){
 		
-		case1:
+		case5:
 			printf("A");
 			break;
 		case11:

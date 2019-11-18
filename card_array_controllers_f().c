@@ -63,7 +63,7 @@ int mixCardTray(void) {
 		for(k=0;k<N_CARDSET;k++){ //
 			
 			for(j=0;j<13;j++){
-				int index=rand()%(N_CARDSET*52) //
+				int index=rand()%(N_CARDSET*52); //
 				
 				while(CardTray[index]!=0){
 					index=rand()%(N_CARDSET*52); //
