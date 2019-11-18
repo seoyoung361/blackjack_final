@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = card_processing_f().o
-LINKOBJ  = card_processing_f().o
+OBJ      = card_processing_f().o card_array_controllers_f().o playinggames_f().o playinggames_after_game_starts_f().o check_result_f().o check_winner_f().o
+LINKOBJ  = card_processing_f().o card_array_controllers_f().o playinggames_f().o playinggames_after_game_starts_f().o check_result_f().o check_winner_f().o
 LIBS     = -L"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib" -L"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Users/이서영/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -26,3 +26,18 @@ $(BIN): $(OBJ)
 
 card_processing_f().o: card_processing_f().c
 	$(CC) -c card_processing_f().c -o card_processing_f().o $(CFLAGS)
+
+card_array_controllers_f().o: card_array_controllers_f().c
+	$(CC) -c card_array_controllers_f().c -o card_array_controllers_f().o $(CFLAGS)
+
+playinggames_f().o: playinggames_f().c
+	$(CC) -c playinggames_f().c -o playinggames_f().o $(CFLAGS)
+
+playinggames_after_game_starts_f().o: playinggames_after_game_starts_f().c
+	$(CC) -c playinggames_after_game_starts_f().c -o playinggames_after_game_starts_f().o $(CFLAGS)
+
+check_result_f().o: check_result_f().c
+	$(CC) -c check_result_f().c -o check_result_f().o $(CFLAGS)
+
+check_winner_f().o: check_winner_f().c
+	$(CC) -c check_winner_f().c -o check_winner_f().o $(CFLAGS)
