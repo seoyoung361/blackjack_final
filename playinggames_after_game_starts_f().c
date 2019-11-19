@@ -138,4 +138,3 @@ int calcStepResult(int user, int cardcnt) {
 		return 3;
 	}
 }
-

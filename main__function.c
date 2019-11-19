@@ -73,8 +73,8 @@ int main(int argc, char *argv[]) {
 		
 		roundIndex++;
 		printf("\n----------ROUND:%d---------------------\n", roundIndex);
-		printf("\n----------dollar Status----------------\n");
-		printUserDollarStatus();
+		printf("\n----------BETTING STEP----------------\n");
+		
 		betDollar();
 		offerCards(); //1. give cards to all the players
 		

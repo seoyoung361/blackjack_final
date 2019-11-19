@@ -56,14 +56,16 @@ int mixCardTray(void) {
 	
 	int i, j, k;
 	int card_type=101; // 101~113 is H, 201~213 is D, 301~313 is S, 401~413 is C
+	int temp=card_type; //temporary space to put card in the tray
+	int index=rand()%(N_CARDSET*52); // 
 	
 	for(i=0;i<4;i++){
-		int temp=card_type; //temporary space to put card in the tray
+		temp=card_type; //temporary space to put card in the tray
 		
 		for(k=0;k<N_CARDSET;k++){ //
 			
 			for(j=0;j<13;j++){
-				int index=rand()%(N_CARDSET*52); //
+				index=rand()%(N_CARDSET*52); // 
 				
 				while(CardTray[index]!=0){
 					index=rand()%(N_CARDSET*52); //
@@ -81,7 +83,7 @@ int mixCardTray(void) {
 //get one card from the tray
 int pullCard(void) {
 	
-	return CardTray[cardIndex++]; //get one ard from cardtray. do 'cardIndex++' to get next card
+	return CardTray[cardIndex++]; //get one card from cardtray. do 'cardIndex++' to get next card
 	
 }
 

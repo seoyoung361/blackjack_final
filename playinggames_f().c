@@ -58,7 +58,7 @@ int configUser(void) {
 	
 	do
 	{
-	printf("Input the number of players(MAX:5): \n");
+	printf("Input the number of players(MAX:5): ");
 	scanf("%d", &n_user);
 	
 	if (n_user>=6)
@@ -86,19 +86,21 @@ int betDollar(void) {
 	int i; 
 	int bet_dollar;
 	
-	printf(" -> your betting:");
+	
+	printf("--> your betting:");
 	scanf("%d", &bet_dollar); //input my betting dollar
 	
-	bet[0]=bet_dollar; // put my betting dollar into array
+    bet[0]=bet_dollar;// put 'you' betting dollar into array
 	for(i=1;i<n_user;i++){
-		while(1){
+		
 			int bet_dollar=(rand()%N_MAX_BET)+1; //from 1 to n_max_bet, decide players betting dollar  
-			if(bet_dollar<=dollar[i]){
+			if(bet_dollar<=dollar[i]){           // not to bet over owned dollar
 				bet[i]=bet_dollar;
-				break;
+				
 			}
-		}
+	printf("--> player%d bets: %d \n",i,bet_dollar );	
 	}
+	
 	
 }
 
@@ -122,17 +124,17 @@ void offerCards(void) {
 //print initial card status
 void printCardInitialStatus(void) {
 	int i;
-	printf("----CARD OFFERING-----/n -->dealer   :");  //dealer's card
+	printf("\n----CARD OFFERING-----\n-->dealer   :");  //dealer's card
 	printCard(cardhold[n_user][1]);
 	printf("\n");
-	printf("you:");// 
+	printf("-->you:");// 
 	printCard(cardhold[0][0]);
 	printf(",");
 	printCard(cardhold[0][1]);
 	printf("\n");
 	// player's card
 	 for(i=1;i<n_user;i++){
-	 	printf("player%d: ", i);
+	 	printf("-->player%d: ", i);
 	 	printCard(cardhold[i][0]);
 	 	printf(",");
 	 	printCard(cardhold[i][1]);
@@ -140,3 +142,4 @@ void printCardInitialStatus(void) {
 	 }
 	
 }
+

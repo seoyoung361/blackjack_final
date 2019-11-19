@@ -64,37 +64,38 @@ int getCardNum(int cardnum) {
 void printCard(int cardnum) {
 	
 	int kind_of_card=cardnum/100; // know what kind of card with quotient
-    int number_of_card=cardnum%100; //  know number of card with remainder
+   
 	
 	switch(kind_of_card){
 		
-		case1:
+		case 1:
 			printf("H");
 			break;
-		case2:
+		case 2:
 		    printf("D");
 		    break;
-		case3:
+		case 3:
 		    printf("S");
 		    break;
-		case4:
-		    printf("c");
+		case 4:
+		    printf("C");
 		    break;
 		    
 	}
 	
+	int number_of_card=cardnum%100; //  know number of card with remainder
 	switch(number_of_card){
 		
-		case5:
+		case 1:
 			printf("A");
 			break;
-		case11:
+		case 11:
 		    printf("J");
 			break;
-		case12:
+		case 12:
 		    printf("Q");
 			break;
-		case13:
+		case 13:
 		    printf("k");
 			break;
 		default:
@@ -103,3 +104,5 @@ void printCard(int cardnum) {
 	}
 	
 }
+
+
