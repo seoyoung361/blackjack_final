@@ -49,3 +49,25 @@ int getIntegerInput(void) {
     return input;
 }
 
+int checkWinner() {
+	int i;
+	//whose final winner
+	int max_dollar_player=0;
+	for(i=1;i<n_user;i++){
+		//if another player has more money, reset the max
+		if(dollar[max_dollar_player]<dollar[i]){
+			max_dollar_player=i;
+		}
+	}
+	// final result
+	printf("\n-----------RESULT----------\n");
+	printUserDollarStatus();
+	printf("\n----------FINAL WINNER-----------\n");
+	if(max_dollar_player==0)
+	   printf("\n\t\t is you");
+	else
+	   printf("\n\t\t player%d\n", max_dollar_player );
+	printf("\n------------------------------------------------\n");
+	
+	
+}
