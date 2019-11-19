@@ -49,3 +49,93 @@ int getIntegerInput(void) {
     return input;
 }
 
+int getAction(void) {
+	char go_stop[5];
+	printf(" ::Action? (0-go, others-stay): ");
+	scanf("%d", &go_stop);
+	if(go_stop[0]==1){
+		return 1;
+	}
+	else if(go_stop[0]==0){
+		return 0;
+	}
+}
+
+int computer_getAction(int user){
+	
+	if(cardSum[user]<17)
+	  return 1;
+	else
+	  return 0;  
+	
+	
+}	
+
+
+void printUserCardStatus(int user, int cardcnt) {
+	int i;
+	
+	printf("   -> card : ");
+	for (i=0;i<cardcnt;i++)
+		printCard(cardhold[user][i]);
+	printf("\t ::: ");
+}
+
+void printUserDollarStatus(){
+	
+	int i;
+	
+	for(i=0;i<n_user;i++){
+		if(i==0)
+		 printf("you:");
+		else
+		 printf("player %d:",i); 
+	
+	printf("%d\n", dollar[i]);	 
+	}
+}
+
+
+
+// calculate the card sum and see if : 1. under 21, 2. over 21, 3. blackjack
+int calcStepResult(int user, int cardcnt) {
+	int i;
+	cardSum[user]=0; 
+	 //calculate cardnumber which player have
+	for (i=0; i<cardcnt;i++){
+		//
+		int real_num=getCardNum(cardhold[user][i]); 
+		//if A is picked
+		if(real_num==1){
+			//
+			if(cardSum[user]+11>21)
+			 cardSum[user]+=1;
+			else
+			 cardSum[user]+=11; 
+			
+		}
+		//J,Q,K is all 10
+		else if(real_num>10){
+			real_num=10;
+			cardSum[user]+=real_num;
+		}
+		else{
+			cardSum[user]+=real_num;
+		}
+	}
+	
+	//if smaller than 21 return 1, if bigger than 2 return 2, if 21 return 3.
+	if(cardSum[user]<21){
+		printf("(%d)", cardSum[user]);
+		return 1;
+	}
+	else if(cardSum[user]>21){
+		printf("(%d)",cardSum[user]);
+		return 2;
+	}
+	else{
+		printf("(%d, blackjack)", cardSum[user]);
+		return 3;
+	}
+}
+

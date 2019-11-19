@@ -16,7 +16,7 @@
 
 
 //card tray object
-int CardTray[N_CARDSET*N_CARD];
+int CardTray[N_CARDSET*N_CARD];     //extern 선언해야하는가 
 int cardIndex = 0;							
 
 
