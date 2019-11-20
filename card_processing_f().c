@@ -55,54 +55,45 @@ int getIntegerInput(void) {
 
 //calculate the actual card number in the blackjack game
 int getCardNum(int cardnum) {
-	
-	return cardnum % 100;
-	
+  return cardnum % 100;
 }
 
 //print the card information (e.g. DiaA)
 void printCard(int cardnum) {
-	
-	int kind_of_card=cardnum/100; // know what kind of card with quotient
-   
-	
-	switch(kind_of_card){
-		
-		case 1:
-			printf("H");
-			break;
-		case 2:
-		    printf("D");
-		    break;
-		case 3:
-		    printf("S");
-		    break;
-		case 4:
-		    printf("C");
-		    break;
-		    
-	}
-	
-	int number_of_card=cardnum%100; //  know number of card with remainder
-	switch(number_of_card){
-		
-		case 1:
-			printf("A");
-			break;
-		case 11:
-		    printf("J");
-			break;
-		case 12:
-		    printf("Q");
-			break;
-		case 13:
-		    printf("k");
-			break;
-		default:
-		    printf("%d", number_of_card);
-			break;
-	}
-	
+  int kind_of_card = cardnum / 100; // know what kind of card with quotient
+  switch (kind_of_card){
+  case 1 :
+     printf("H");
+     break;
+  case 2:
+     printf("D");
+     break;
+  case 3:
+     printf("S");
+     break;
+  case 4:
+     printf("C");
+     break;
+  }
+  int number_of_card = cardnum % 100; //  know number of card with remainder
+  switch (number_of_card){
+  case 1:
+     printf("A");
+     break;
+  case 11:
+     printf("J");
+     break;
+  case 12:
+     printf("Q");
+     break;
+  case 13:
+     printf("K");
+     break;
+  default:
+     printf("%d", number_of_card);
+     break;
+  }
 }
+
 
 

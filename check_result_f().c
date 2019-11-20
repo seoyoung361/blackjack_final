@@ -33,113 +33,95 @@ int gameEnd = 0; 							//game end flag
 int cardholdnum[N_MAX_USER];                //card that user hold at the final
 int playerwin[N_MAX_USER];                  //express user win or not    
 
-//some utility functions
-
-//get an integer input from standard input (keyboard)
-//return : input integer value
-//         (-1 is returned if keyboard input was not integer)
-int getIntegerInput(void) {
-    int input, num;
-    
-    num = scanf("%d", &input);
-    fflush(stdin);
-    if (num != 1) //if it fails to get integer
-        input = -1;
-    
-    return input;
-}
-
-
-//return final result of dealer, you, player 
 int checkResult() {
-	int i;
-	printUserCardStatus(n_user,cardholdnum[n_user]);
-	
-	calcStepResult(n_user, cardholdnum[n_user]);
-	
-	printf("\n");
-	
-	for(i=0;i<n_user;i++){
-		printUserCardStatus(i, cardholdnum[i]);
-		calcStepResult(i, cardholdnum[i]);
-		printf("\n");
-	}
-	for(i=0;i<n_user;i++){
-		
-		//case1: blackjack between you or player
-		if(cardSum[i]==21){
-			dollar[i]+=(bet[i]*2); //if blackjack, get betting*2 dollar
-			playerwin[i]=1;
-		}
-		//case2: over 21 between you and player
-		else if (cardSum[i]>21){
-			dollar[i]-=bet[i];//lose betting dollar
-			playerwin[i]=2;
-		}
-	}
-	for(i=0;i<n_user;i++){
-		//give a pass if players win or lose is decide
-	  if(playerwin[i]==1 || playerwin[i]==2)
-		  continue;
-	  else{
-		//case3: if dealer sum is blackjack
-		if(cardSum[n_user]==21){
-			dollar[i]-=bet[i];
-			playerwin[i]=2;
-		}
-		//case4: if dealer sum is bigger than 21
-		else if(cardSum[n_user]>21){
-			dollar[i]+=(bet[i]*2);
-			playerwin[i]=1;
-		}
-		//case5: if usersum >=dealersum
-		else if(cardSum[n_user]<=cardSum[i]){
-			dollar[i]+=(bet[i]*2);
-			playerwin[i]=1;
-		}
-		//case6: if user sum < dealer sum
-		else{
-			dollar[i]-=bet[i];
-			playerwin[i]=2;
-		}
-	  }
-	}
-   //return win or not
-   printf("=>you-");
-   if(playerwin[0]==1)
-     printf("win");
-   else
-      printf("lose");
-    for(i=1;i<n_user;i++){
-    	printf("player%d-", i);
-    	if(playerwin[i]==1)
-    	  printf("win");
-    	else
-    	  printf("lose");
-    	  // 마지막 플레이어에는 쉼포를 넣지않기위한 코드
-		  if(i !=(n_user-1)){
-		  	printf(",");
-		  } 
-	}
-	printf("\n");
-	
-	//reset win or not
-	for(i=0;i<n_user;i++){
-		playerwin[i]=0;
-	}
-	//check the game is end
-	//1. card if end
-	if(cardIndex==N_MIN_ENDCARD){
-		gameEnd=1;
-	}
-	//2. player's bankrupt
-	else{
-		for(i=0;i<n_user;i++){
-			if(dollar[i]<=0){
-				gameEnd=1;
-				break;
-			}
-		}
-	}
+  int i;
+  //print dealer, you, player's result
+  printUserCardStatus(n_user, cardholdnum[n_user]);
+  calcStepResult(n_user, cardholdnum[n_user]);
+  printf("\n");
+  for (i = 0; i < n_user; i++){
+     printUserCardStatus(i, cardholdnum[i]);
+     calcStepResult(i, cardholdnum[i]);
+     printf("\n");
+  }
+  
+  for (i = 0; i < n_user; i++){
+     //case1: blackjack between you or player
+     if (cardSum[i] == 21){
+        dollar[i] += (bet[i]*2); //if it's blackjack, get (bet*2)
+        playerwin[i] = 1;
+     }
+     //case2: over 21 between you and player
+     else if (cardSum[i] > 21){
+        dollar[i] -= bet[i]; //lose betting dollar
+        playerwin[i] = 2;
+     }
+  }
+  for (i = 0; i < n_user; i++){
+     //give a pass if players win or lose is decided
+     if (playerwin[i] == 1 || playerwin[i] == 2)
+        continue;
+     else{
+        //case3: if dealer sum is blackjack
+        if (cardSum[n_user] == 21){
+           dollar[i] -= bet[i];
+           playerwin[i] = 2;
+        }
+        //case4: if dealer sum is bigger than 21
+        else if (cardSum[n_user] > 21){
+           dollar[i] += (bet[i] * 2);
+           playerwin[i] = 1;
+        }
+        //case5: if usersum >=dealersum
+        else if(cardSum[n_user] <= cardSum[i]){
+           dollar[i] += (bet[i] * 2);
+           playerwin[i] = 1;
+        }
+        //case6: if user sum < dealer sum
+        else{
+           dollar[i] -= bet[i];
+           playerwin[i] = 2;
+        }
+     }
+  }
+  //return win or not
+  printf("=> YOU - ");
+  if (playerwin[0] == 1)
+     printf("win,");
+  else
+     printf("lose,");
+  for (i = 1; i < n_user; i++){
+     printf("player %d - ", i);
+     if (playerwin[i] == 1)
+        printf("win");
+     else
+        printf("lose");
+     
+     if (i != (n_user - 1)){
+        printf(",");
+     }
+  }
+  printf("\n");
+
+  //reset win or not
+  for (i = 0; i < n_user; i++){
+     playerwin[i] = 0;
+  }
+  
+  //check the game is end
+	//1. card if end 
+  if (cardIndex == N_MIN_ENDCARD){
+     gameEnd = 1;
+  }
+  //2. player's bankrupt
+  else{
+     for (i = 0; i < n_user; i++){
+        if (dollar[i] <= 0){
+           gameEnd = 1;
+           break;
+        }
+     }
+  }
+
 }
-	
+

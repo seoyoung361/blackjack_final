@@ -33,41 +33,25 @@ int gameEnd = 0; 							//game end flag
 int cardholdnum[N_MAX_USER];                //card that user hold at the final
 int playerwin[N_MAX_USER];                  //express user win or not    
 
-//some utility functions
+int checkWinner(void) {
+  int i;
+  //whose final winner
+  int max_dollar_player = 0;
+  for (i = 1; i < n_user; i++){
+     //if another player has more money, reset the max
+     if (dollar[max_dollar_player] < dollar[i]){
+        max_dollar_player = i;
+     }
+  }
+  // final result
+  printf("\n------------------ FINAL RESULT --------------------------\n");
+  printUserDollarStatus();
+  printf("\n------------------ FINAL WINNER --------------------------\n");
+  if (max_dollar_player == 0)
+     printf("\n\t\t     is YOU\n");
+  else
+     printf("\n\t\t     player%d \n", max_dollar_player);
 
-//get an integer input from standard input (keyboard)
-//return : input integer value
-//         (-1 is returned if keyboard input was not integer)
-int getIntegerInput(void) {
-    int input, num;
-    
-    num = scanf("%d", &input);
-    fflush(stdin);
-    if (num != 1) //if it fails to get integer
-        input = -1;
-    
-    return input;
+  printf("\n-----------------------------------------------------------\n");
 }
 
-int checkWinner() {
-	int i;
-	//whose final winner
-	int max_dollar_player=0;
-	for(i=1;i<n_user;i++){
-		//if another player has more money, reset the max
-		if(dollar[max_dollar_player]<dollar[i]){
-			max_dollar_player=i;
-		}
-	}
-	// final result
-	printf("\n-----------RESULT----------\n");
-	printUserDollarStatus();
-	printf("\n----------FINAL WINNER-----------\n");
-	if(max_dollar_player==0)
-	   printf("\n\t\t is you");
-	else
-	   printf("\n\t\t player%d\n", max_dollar_player );
-	printf("\n------------------------------------------------\n");
-	
-	
-}

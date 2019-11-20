@@ -33,108 +33,102 @@ int gameEnd = 0; 							//game end flag
 int cardholdnum[N_MAX_USER];                //card that user hold at the final
 int playerwin[N_MAX_USER];                  //express user win or not    
 
-//some utility functions
-
-//get an integer input from standard input (keyboard)
-//return : input integer value
-//         (-1 is returned if keyboard input was not integer)
-int getIntegerInput(void) {
-    int input, num;
-    
-    num = scanf("%d", &input);
-    fflush(stdin);
-    if (num != 1) //if it fails to get integer
-        input = -1;
-    
-    return input;
+int getAction() {
+  char go_stop[5];
+  printf("Action?(if go, input g /if stop, input s) : ");
+  scanf("%s", &go_stop);
+  //if player input go, return 1
+  if (go_stop[0] == 'g'){
+     return 1;
+  }
+  //if player input stop, return 0
+  else if (go_stop[0] == 's'){
+     return 0;
+  }
 }
 
-int getAction(void) {
-	char go_stop[5];
-	printf(" ::Action? (0-go, others-stay): ");
-	scanf("%d", &go_stop);
-	if(go_stop[0]==1){
-		return 1;
-	}
-	else if(go_stop[0]==0){
-		return 0;
-	}
-}
-
+//computer player and dealer 's action function 
 int computer_getAction(int user){
-	
-	if(cardSum[user]<17)
-	  return 1;
-	else
-	  return 0;  
-	
-	
-}	
+ 
+  if (cardSum[user] < 17)
+     return 1;
+  else
+     return 0;
+}
 
 
 void printUserCardStatus(int user, int cardcnt) {
-	int i;
-	
-	printf("   -> card : ");
-	for (i=0;i<cardcnt;i++)
-		printCard(cardhold[user][i]);
-	printf("\t ::: ");
+  int i;
+ // get user and separate you, dealer, player
+  if (user == 0)
+     printf("YOU");
+  else if (user == n_user)
+     printf("dealer");
+  else
+     printf("player%d", user);
+  printf("\t-> card : ");
+  for (i = 0; i < cardcnt; i++){
+     printCard(cardhold[user][i]);
+     printf(" ");
+  }
+  printf("\t ::: ");
 }
 
+//print dollar
 void printUserDollarStatus(){
-	
-	int i;
-	
-	for(i=0;i<n_user;i++){
-		if(i==0)
-		 printf("you:");
-		else
-		 printf("player %d:",i); 
-	
-	printf("%d\n", dollar[i]);	 
-	}
+  int i;
+
+  for (i = 0; i < n_user; i++){
+     if (i == 0)
+        printf("You : ");   
+     else
+        printf("player%d : ", i);
+
+     printf("%d\n", dollar[i]);
+  }
 }
 
 
 
 // calculate the card sum and see if : 1. under 21, 2. over 21, 3. blackjack
 int calcStepResult(int user, int cardcnt) {
-	int i;
-	cardSum[user]=0; 
-	 //calculate cardnumber which player have
-	for (i=0; i<cardcnt;i++){
-		//
-		int real_num=getCardNum(cardhold[user][i]); 
-		//if A is picked
-		if(real_num==1){
-			//
-			if(cardSum[user]+11>21)
-			 cardSum[user]+=1;
-			else
-			 cardSum[user]+=11; 
-			
-		}
-		//J,Q,K is all 10
-		else if(real_num>10){
-			real_num=10;
-			cardSum[user]+=real_num;
-		}
-		else{
-			cardSum[user]+=real_num;
-		}
-	}
-	
-	//if smaller than 21 return 1, if bigger than 2 return 2, if 21 return 3.
-	if(cardSum[user]<21){
-		printf("(%d)", cardSum[user]);
-		return 1;
-	}
-	else if(cardSum[user]>21){
-		printf("(%d)",cardSum[user]);
-		return 2;
-	}
-	else{
-		printf("(%d, blackjack)", cardSum[user]);
-		return 3;
-	}
+  int i;
+  cardSum[user] = 0;
+  //calculate player's cards
+  for (i = 0; i < cardcnt; i++){
+     //return cardnumber
+     int real_num = getCardNum(cardhold[user][i]);
+     //if A
+     if (real_num == 1){
+        //( pick 11)'s result is bigger than 21-> lose. so 1 is better
+        if (cardSum[user] + 11 > 21)
+           cardSum[user] += 1;
+        else
+           cardSum[user] += 11;
+     }
+     //J Q Kis all 10
+     else if (real_num > 10){
+        real_num = 10;
+        cardSum[user] += real_num;
+     }
+     else{
+        cardSum[user] += real_num;
+     }
+  }
+
+  //if smaller than 21 return 1, if bigger than 2 return 2, if 21 return 3.
+  if (cardSum[user] < 21){
+     printf("(%d)", cardSum[user]);
+     return 1;
+  }
+  else if (cardSum[user] > 21){
+     printf("(%d)", cardSum[user]);
+     return 2;
+  }
+  else{
+     printf("(%d, blackjack)", cardSum[user]);
+     return 3;
+  }
+  
+  
 }
