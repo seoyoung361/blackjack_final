@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define N_CARDSET			1
 #define N_CARD				52
 #define N_DOLLAR			50
@@ -16,24 +17,23 @@
 
 
 //card tray object
-int CardTray[N_CARDSET*N_CARD];
-int cardIndex = 0;							
+extern int CardTray[N_CARDSET*N_CARD];     //extern 선언해야하는가 
+extern int cardIndex ;							
 
 
 //player info
-int dollar[N_MAX_USER];						//dollars that each player has
+extern int dollar[N_MAX_USER];						//dollars that each player has
 extern int n_user;									//number of users
 
 
 //play yard information
-int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//cards that currently the players hold
-int cardSum[N_MAX_USER];					//sum of the cards
-int bet[N_MAX_USER];						//current betting 
-int gameEnd = 0; 							//game end flag
-int cardholdnum[N_MAX_USER];                //card that user hold at the final
-int playerwin[N_MAX_USER];                  //express user win or not    
+extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//cards that currently the players hold
+extern int cardSum[N_MAX_USER];					//sum of the cards
+extern int bet[N_MAX_USER];						//current betting 
+extern int gameEnd ; 							//game end flag
+extern int cardholdnum[N_MAX_USER];                //card that user hold at the final
+extern int playerwin[N_MAX_USER];                  //express user win or not          
 
-//some utility functions
 
 //get an integer input from standard input (keyboard)
 //return : input integer value

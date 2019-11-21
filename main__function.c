@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define N_CARDSET			1
 #define N_CARD				52
 #define N_DOLLAR			50
@@ -17,24 +18,24 @@
 
 //card tray object
 int CardTray[N_CARDSET*N_CARD];     //extern 선언해야하는가 
-int cardIndex = 0;							
+int cardIndex =0;							
 
 
 //player info
 int dollar[N_MAX_USER];						//dollars that each player has
-extern int n_user;									//number of users
+int n_user;									//number of users
 
 
 //play yard information
 int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//cards that currently the players hold
 int cardSum[N_MAX_USER];					//sum of the cards
 int bet[N_MAX_USER];						//current betting 
-int gameEnd = 0; 							//game end flag
+int gameEnd =0; 							//game end flag
 int cardholdnum[N_MAX_USER];                //card that user hold at the final
 int playerwin[N_MAX_USER];                  //express user win or not          
 
 int main(int argc, char *argv[]) {
-  int roundIndex = 0;
+  int roundIndex ;
   int max_user;
   int i;
 
